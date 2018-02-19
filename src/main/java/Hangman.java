@@ -12,7 +12,7 @@ public class Hangman {
 		
 		opts = new CommandOpts(args);
 		
-		if (opts.fileWithCustomWords == "") {
+		if (opts.getFileWithCustomWords() == "") {
 		
 			System.out.println("  1. Counties");
 			System.out.println("  2. Countries");
@@ -20,9 +20,9 @@ public class Hangman {
 
 			System.out.print("Pick a category:");
 
-		 	game = new GameState(Words.randomWord(sc.nextInt()), opts.maxGuesses, opts.maxHints);
+		 	game = new GameState(Words.randomWord(sc.nextInt()), opts.getMaxGuesses(), opts.getMaxHints());
 		}else {
-			game = new GameState(Words.randomWord(opts.fileWithCustomWords), opts.maxGuesses, opts.maxHints);
+			game = new GameState(Words.randomWord(opts.getFileWithCustomWords()), opts.getMaxGuesses(), opts.getMaxHints());
 		}
 		
 		while(!game.won() && !game.lost()) {
