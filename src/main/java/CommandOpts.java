@@ -1,27 +1,27 @@
-
 public class CommandOpts {
+	public static final int DEFAULT_MAX_GUESSES = 10;
+	public static final int DEFAULT_MAX_HINTS = 2;
 
-	public int maxguesses;
-	public int maxhints;
+	public int maxGuesses;
+	public int maxHints;
 	
-	String wordsource;
+	String fileWithCustomWords;
 	
 	CommandOpts(String[] args) {
-		maxguesses = 10;
-		maxhints = 2;
-		
-		wordsource = "";
-		
-		for(int i = 0; i < args.length; ++i) {
+		maxGuesses = DEFAULT_MAX_GUESSES;
+		maxHints = DEFAULT_MAX_HINTS;
+		fileWithCustomWords = "";
+
+		for (int i = 0; i < args.length; ++i) {
 			if (args[i].equals("--guesses")) {
-				maxguesses = Integer.parseInt(args[i+1]);
+				maxGuesses = Integer.parseInt(args[i + 1]);
 				i++;
-			}
-			else if (args[i].equals("--hints")) {
-				maxhints = Integer.parseInt(args[i+1]);
+			} else if (args[i].equals("--hints")) {
+				maxHints = Integer.parseInt(args[i + 1]);
 				i++;
+			} else {
+				fileWithCustomWords = args[i];
 			}
-			else wordsource = args[i];
 		}
 	}
 }

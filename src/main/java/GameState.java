@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class GameState {
 	public String word;
-	public int g;
+	public int guessesAmount;
 	public int wrong;
 	public int h;
 	
@@ -13,7 +13,7 @@ public class GameState {
 	
 	public Scanner sc = new Scanner(System.in).useDelimiter("\n");
 	
-	public GameState(String target, int g, int h) {
+	public GameState(String target, int guessesAmount, int h) {
 		this.word = target;
 		not = new ArrayList<Character>();
 		   got = new ArrayList<Character>();
@@ -24,8 +24,8 @@ public class GameState {
 		}
 		//System.out.println(missing);
 		
-		this.g = 0;
-		wrong = g;
+		this.guessesAmount = 0;
+		wrong = guessesAmount;
 		this.h = h;
 	}
 	
@@ -67,12 +67,12 @@ public class GameState {
 			if (not.get(i) == letter) {
 				not.remove(i);
 				got.add(letter);
-				g++;
+				guessesAmount++;
 				return true;
 			}
 		}
 
-		g++; // One more guess
+		guessesAmount++; // One more guess
 		wrong--;
 		return false;
 	}
