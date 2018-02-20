@@ -30,6 +30,22 @@ public class CommandOptsTest {
 	}
 
 	@Test
+	public void validFilePassedTest() {
+		String[] args = {"words.txt"};
+		CommandOpts opts = new CommandOpts(args);
+		assertEquals("words.txt", opts.getFileWithCustomWords());
+	}
+
+	@Test
+	public void unfinishedArgTest() {
+		String[] args = { "--guesses"};
+		CommandOpts opts = new CommandOpts(args);
+		assertEquals(10, opts.getMaxGuesses());
+		assertEquals(2, opts.getMaxHints());
+		assertEquals("", opts.getFileWithCustomWords());
+	}
+
+	@Test
 	public void invalidArgumentsTest() {
 		String[] args = {"gbj13ds", "asd", "asd2123/./!"};
 		CommandOpts opts = new CommandOpts(args);
@@ -44,7 +60,5 @@ public class CommandOptsTest {
 		assertEquals(2, opts.getMaxHints());
 		assertEquals("", opts.getFileWithCustomWords());
 	}
-
-	//TODO fix number parsing for arguments
 
 }

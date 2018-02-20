@@ -18,19 +18,30 @@ public class CommandOpts {
 	}
 
 	private void parseArgs(final String[] args) {
-    	try {
-			for (int i = 0; i < args.length; ++i) {
-				if (args[i].equals("--guesses")) {
-					maxGuesses = Integer.parseInt(args[i + 1]);
-					i++;
-				} else if (args[i].equals("--hints")) {
-					maxHints = Integer.parseInt(args[i + 1]);
-					i++;
-				} else {
-					fileWithCustomWords = args[i];
-				}
+    	int numericArg;
+		for (int i = 0; i < args.length; ++i) {
+			if (args[i].equals("--guesses") && (i + 1) < args.length) {
+				numericArg = validateInput(maxGuesses, args[i + 1]);
+				maxGuesses = numericArg;
+				i++;
+			} else if (args[i].equals("--hints") && (i + 1) < args.length) {
+				numericArg = validateInput(maxHints, args[i + 1]);
+				maxHints = numericArg;
+				i++;
+			} else if (args[i].endsWith(".txt")) {
+				fileWithCustomWords = args[i];
 			}
-		} catch (NumberFormatException nfe) {}
+		}
+	}
+
+	private int validateInput(final int varToChange, final String line) {
+    	int temp = varToChange;
+    	try {
+			temp = Integer.parseInt(line);
+		} catch (NumberFormatException e) {
+			System.err.println("Invalid number passed");
+		}
+		return temp;
 	}
 
     public final int getMaxGuesses() {
