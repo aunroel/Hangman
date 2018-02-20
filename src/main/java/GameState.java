@@ -92,10 +92,12 @@ public class GameState {
 			return;
 		}
 		
-		System.out.print("Try: ");
-		System.out.println(charsToBeGuessed.get(rand.nextInt(charsToBeGuessed.size())));
-		if (hintsLeft > 0){
+
+        if (hintsLeft > 0){
 			hintsLeft--;
 		}
-	}
+        System.out.print("Try: ");
+        System.out.print(charsToBeGuessed.get(rand.nextInt(charsToBeGuessed.size())));
+        System.out.println(" (hints left: " + hintsLeft + ")");
+    }
 }

@@ -19,7 +19,7 @@ public class Hangman {
 			System.out.println("  2. Countries");
 			System.out.println("  3. Cities");
 
-			System.out.print("Pick a category:");
+			System.out.print("Pick a category: ");
 
 		 	game = new GameState(wordsObj.randomWord(sc.nextInt()), opts.getMaxGuesses(), opts.getMaxHints());
 		}else {
