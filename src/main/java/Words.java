@@ -55,7 +55,7 @@ public final class Words {
 			e.printStackTrace();
 		}
 
-		// return word from any default category picked randomly
+		// return wordToGuess from any default category picked randomly
 		return randomWord(rand.nextInt(CITIES) + 1);
 	}
 

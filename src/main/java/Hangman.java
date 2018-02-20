@@ -41,9 +41,9 @@ public class Hangman {
 		
 		if (game.won()) {
 			System.out.println("Well done!");
-			System.out.println("You took " + game.guessesAmount + " guesses");
+			System.out.println("You took " + game.guessesMade + " guesses");
 		} else {
-			System.out.println("You lost! The word was " + game.word);
+			System.out.println("You lost! The wordToGuess was " + game.wordToGuess);
 		}
 	}
 
