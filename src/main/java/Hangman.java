@@ -5,6 +5,7 @@ public class Hangman {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in, "UTF-8");
+		Words wordsObj = new Words();
 		GameState game;
 		CommandOpts opts;
 
@@ -20,9 +21,9 @@ public class Hangman {
 
 			System.out.print("Pick a category:");
 
-		 	game = new GameState(Words.randomWord(sc.nextInt()), opts.getMaxGuesses(), opts.getMaxHints());
+		 	game = new GameState(wordsObj.randomWord(sc.nextInt()), opts.getMaxGuesses(), opts.getMaxHints());
 		}else {
-			game = new GameState(Words.randomWord(opts.getFileWithCustomWords()), opts.getMaxGuesses(), opts.getMaxHints());
+			game = new GameState(wordsObj.randomWord(opts.getFileWithCustomWords()), opts.getMaxGuesses(), opts.getMaxHints());
 		}
 		
 		while(!game.won() && !game.lost()) {
