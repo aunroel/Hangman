@@ -6,83 +6,99 @@ import java.util.Scanner;
 public class GameState {
 	public String wordToGuess;
 	public int guessesMade;
-	public int wrong;
+	public int guessesLeft;
 	public int hintsLeft;
 	
-	ArrayList<Character> guessedCharsFromWord;
-	ArrayList<Character> charsToBeGuessed;
+	ArrayList<Character> guessedChars;
+	ArrayList<Character> charsToGuess;
+	ArrayList<Character> charsForHints;
 	
 	public Scanner sc = new Scanner(System.in, "UTF-8").useDelimiter("\n");
 	
 	public GameState(String wordToGuess, int maxGuesses, int maxHints) {
 		this.wordToGuess = wordToGuess;
-		charsToBeGuessed = new ArrayList<>();
-        guessedCharsFromWord = new ArrayList<>();
+		charsToGuess = new ArrayList<>();
+        guessedChars = new ArrayList<>();
+
 		
 		for(int i = 0; i < wordToGuess.length(); ++i) {
-			if (!charsToBeGuessed.contains(Character.toLowerCase(wordToGuess.charAt(i))))
-			charsToBeGuessed.add(Character.toLowerCase(wordToGuess.charAt(i)));
+			if (!charsToGuess.contains(wordToGuess.charAt(i)))
+				charsToGuess.add(wordToGuess.charAt(i));
 		}
-		
+		charsForHints = new ArrayList<>(charsToGuess);
+
 		this.guessesMade = 0;
-		wrong = maxGuesses;
+		guessesLeft = maxGuesses;
 		this.hintsLeft = maxHints;
 	}
 	
 	void showWord() {
 		for (int i = 0; i < wordToGuess.length(); ++i) {
-			if (guessedCharsFromWord.contains(wordToGuess.charAt(i))) {
+			if (guessedChars.contains(wordToGuess.charAt(i))) {
 				System.out.print(wordToGuess.charAt(i));
 			} else {
 				System.out.print("-");
 			}
 		}
 		System.out.println("");
-		// System.out.println(missing);
 	}
 	
 	boolean guessLetter() {
-		int i;
 		char letter;
 		
-		System.out.print("Guess a letter or wordToGuess (? for a hint): ");
+		System.out.print("Guess a letter or word (? for a hint): ");
 		
-		String str = sc.next().toLowerCase();
-		
-		if (str.length() > 1) {
-			if (str.equals(wordToGuess)) {
-				charsToBeGuessed.clear();
-				return true;
-			} else return false;
+		String str = sc.nextLine().toLowerCase();
+
+		if (str.equals("")) {
+			System.out.println("Enter a valid letter/word");
+			return guessLetter();
 		}
-		
+
+		if (str.length() > 1) {
+			if (str.equals(wordToGuess.toLowerCase())) {
+				charsToGuess.clear();
+				charsForHints.clear();
+				return true;
+			} else {
+				guessesMade++;
+				guessesLeft--;
+				return false;
+			}
+		}
+
 		letter = str.charAt(0);
-		
+
 		if (letter == '?') {
 			hint();
-			return false;
+			return guessLetter();
 		}
-		
-		for(i = 0; i < charsToBeGuessed.size(); ++i) { // Loop over the charsToBeGuessed guessedCharsFromWord
-			if (charsToBeGuessed.get(i) == letter) {
-				charsToBeGuessed.remove(i);
-				guessedCharsFromWord.add(letter);
+
+		for(int i = 0; i < charsToGuess.size(); i++) { // Loop over the charsToGuess guessedChars
+			if (charsToGuess.get(i) == letter) {
+				charsToGuess.remove(i);
+				guessedChars.add(letter);
 				guessesMade++;
+
+				if (charsForHints.contains(letter)) {
+					charsForHints.remove(letter);
+				}
+
 				return true;
 			}
 		}
 
 		guessesMade++; // One more guess
-		wrong--;
+		guessesLeft--;
 		return false;
 	}
 	
 	boolean won() {
-        return charsToBeGuessed.size() == 0;
+        return charsToGuess.size() == 0;
 	}
 
 	boolean lost() {
-		return (charsToBeGuessed.size() > 0 && wrong == 0);
+		return (charsToGuess.size() > 0 && guessesLeft == 0);
 	}
 
 	private void hint() {
@@ -91,13 +107,18 @@ public class GameState {
 			System.out.println("No more hints allowed");
 			return;
 		}
-		
 
         if (hintsLeft > 0){
 			hintsLeft--;
 		}
         System.out.print("Try: ");
-        System.out.print(charsToBeGuessed.get(rand.nextInt(charsToBeGuessed.size())));
+        Character hint = charsForHints.get(rand.nextInt(charsForHints.size()));
+        System.out.print(charToLowerCase(hint));
+        charsForHints.remove(hint);
         System.out.println(" (hints left: " + hintsLeft + ")");
     }
+
+    private char charToLowerCase(char ch) {
+		return Character.toLowerCase(ch);
+	}
 }
