@@ -42,19 +42,21 @@ public final class Words {
 			ClassLoader classLoader = getClass().getClassLoader();
 			file = new File(classLoader.getResource(wordSource).getFile());
 
-			wordListFromFile = new String(
-					           Files.readAllBytes(file.toPath()),
-					"UTF-8")
-						       .split("\n");
+			String fileAsString = new String(Files.readAllBytes(file.toPath()), "UTF-8");
+			wordListFromFile = fileAsString.split("\n");
 
-			return wordListFromFile[rand.nextInt(wordListFromFile.length)];
+			if (!fileAsString.equals("")) {
+				return wordListFromFile[rand.nextInt(wordListFromFile.length)];
+			}
 
 		} catch (NullPointerException e) {
 			System.out.println("No file found");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "";
+
+		// return word from any default category picked randomly
+		return randomWord(rand.nextInt(CITIES) + 1);
 	}
 
 	public static int getREGIONS() {

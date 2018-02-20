@@ -24,6 +24,13 @@ public class WordsTest {
     public void noFileToReadTest() {
         Words words = new Words();
         String country = words.randomWord("dfgh.txt");
-        assertEquals("", country);
+        assertNotEquals("", country);
+    }
+
+    @Test
+    public void emptyFileTest() {
+        Words words = new Words();
+        String country = words.randomWord("empty.txt");
+        assertNotEquals("", country);
     }
 }
