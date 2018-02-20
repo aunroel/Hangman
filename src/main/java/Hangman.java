@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Hangman {
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in, "UTF-8");
 		GameState game;
 		CommandOpts opts;
 

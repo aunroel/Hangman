@@ -11,7 +11,7 @@ public class GameState {
 	ArrayList<Character> got;
 	ArrayList<Character> not;
 	
-	public Scanner sc = new Scanner(System.in).useDelimiter("\n");
+	public Scanner sc = new Scanner(System.in, "UTF-8").useDelimiter("\n");
 	
 	public GameState(String target, int guessesAmount, int h) {
 		this.word = target;

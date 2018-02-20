@@ -1,24 +1,22 @@
-
-import sun.text.normalizer.UTF16;
-
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Words {
 
-	static String[] regionsArray = { "Argyll and Bute", "Caithness",  "Kingdom of Fife",
+	private static String[] regionsArray = { "Argyll and Bute", "Caithness",  "Kingdom of Fife",
 			            "East Lothian", "Highland", "Dumfries and Galloway",
 			            "Renfrewshire", "Scottish Borders", "Perth and Kinross" };
 
-	static String[] countriesArray = { "Scotland", "England", "Wales", "Northern Ireland", "Ireland",
+	private static String[] countriesArray = { "Scotland", "England", "Wales", "Northern Ireland", "Ireland",
 			            "France", "Germany", "Netherlands", "Spain", "Portugal",
 			            "Belgium", "Luxembourg", "Switzerland", "Italy", "Greece" };
 
-	static String[] citiesArray = { "St Andrews", "Edinburgh", "Glasgow", "Kirkcaldy", "Perth",
+	private static String[] citiesArray = { "St Andrews", "Edinburgh", "Glasgow", "Kirkcaldy", "Perth",
 			            "Dundee", "Stirling", "Inverness", "Aberdeen", "Falkirk" };
 			
-	static ArrayList<String> wordListFromFile;
+	private static ArrayList<String> wordListFromFile;
 	
 	public static String randomWord(int category) {
 		Random rand = new Random();
@@ -33,12 +31,12 @@ public class Words {
 	
 	public static String randomWord(String wordsource) {
 		String line;
-		FileReader file = null;
+		InputStreamReader file = null;
 		BufferedReader reader = null;
-		wordListFromFile = new ArrayList<String>();
+		wordListFromFile = new ArrayList<>();
 
 		try {
-			file = new FileReader(wordsource);
+			file = new InputStreamReader(new FileInputStream(wordsource), "UTF-8");
 			reader = new BufferedReader(file);
 
 			while((line = reader.readLine()) != null) {
@@ -57,7 +55,6 @@ public class Words {
 					file.close();
 				} catch (IOException e) {
 					System.out.println("IO file closing error");
-					return  "";
 				}
 			}
 			if (reader != null) {
@@ -65,7 +62,6 @@ public class Words {
 					reader.close();
 				} catch (IOException e) {
 					System.out.println("IO reader closing error");
-					return  "";
 				}
 			}
 			System.out.println("File successfully closed");
