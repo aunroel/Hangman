@@ -1,10 +1,13 @@
 
+import sun.text.normalizer.UTF16;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Words {
 
-	static String[] countiesArray = { "Argyll and Bute", "Caithness",  "Kingdom of Fife",
+	static String[] regionsArray = { "Argyll and Bute", "Caithness",  "Kingdom of Fife",
 			            "East Lothian", "Highland", "Dumfries and Galloway",
 			            "Renfrewshire", "Scottish Borders", "Perth and Kinross" };
 
@@ -18,10 +21,11 @@ public class Words {
 	static ArrayList<String> wordListFromFile;
 	
 	public static String randomWord(int category) {
+		Random rand = new Random();
 		switch (category) {
-			case 1:	return countiesArray[(int)(Math.random()*9)];
-			case 2:	return countriesArray[(int)(Math.random()*15)];
-			case 3:	return citiesArray[(int)(Math.random()*10)];
+			case 1:	return regionsArray[rand.nextInt(regionsArray.length)];
+			case 2:	return countriesArray[rand.nextInt(countriesArray.length)];
+			case 3:	return citiesArray[rand.nextInt(citiesArray.length)];
 
 			default: return null;
 		}
@@ -29,11 +33,13 @@ public class Words {
 	
 	public static String randomWord(String wordsource) {
 		String line;
+		FileReader file = null;
+		BufferedReader reader = null;
 		wordListFromFile = new ArrayList<String>();
-		
+
 		try {
-			FileReader file = new FileReader(wordsource);
-			BufferedReader reader = new BufferedReader(file);
+			file = new FileReader(wordsource);
+			reader = new BufferedReader(file);
 
 			while((line = reader.readLine()) != null) {
                 wordListFromFile.add(line);
@@ -45,6 +51,24 @@ public class Words {
 		} catch(IOException e) {
 			System.out.println("IO error");
 			return "";
+		} finally {
+			if (file != null) {
+				try {
+					file.close();
+				} catch (IOException e) {
+					System.out.println("IO file closing error");
+					return  "";
+				}
+			}
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					System.out.println("IO reader closing error");
+					return  "";
+				}
+			}
+			System.out.println("File successfully closed");
 		}
 	}
 }

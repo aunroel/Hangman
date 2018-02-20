@@ -31,7 +31,7 @@ public class CommandOptsTest {
 
 	@Test
 	public void invalidArgumentsTest() {
-		String[] args = {"gbj13ds", "asd", "213", "asd2123/./!"};
+		String[] args = {"gbj13ds", "asd", "asd2123/./!"};
 		CommandOpts opts = new CommandOpts(args);
 		assertEquals("", opts.getFileWithCustomWords());
 	}

@@ -50,7 +50,7 @@ public class GameState {
 		String str = sc.next().toLowerCase();
 		
 		if (str.length() > 1) {
-			if (str==word) {
+			if (str.equals(word)) {
 				not.clear();
 				return true;
 			} else return false;

@@ -12,7 +12,7 @@ public class Hangman {
 		
 		opts = new CommandOpts(args);
 		
-		if (opts.getFileWithCustomWords() == "") {
+		if (opts.getFileWithCustomWords().equals("")) {
 		
 			System.out.println("  1. Counties");
 			System.out.println("  2. Countries");
