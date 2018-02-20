@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.util.Random;
 
@@ -48,8 +49,10 @@ public final class Words {
 
 			return wordListFromFile[rand.nextInt(wordListFromFile.length)];
 
-		} catch (IOException e) {
+		} catch (NullPointerException e) {
 			System.out.println("No file found");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return "";
 	}

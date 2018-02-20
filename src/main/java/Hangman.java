@@ -23,6 +23,9 @@ public class Hangman {
 
 		 	game = new GameState(wordsObj.randomWord(sc.nextInt()), opts.getMaxGuesses(), opts.getMaxHints());
 		}else {
+			if (opts.getFileWithCustomWords().equals("")) {
+				System.exit(0);
+			}
 			game = new GameState(wordsObj.randomWord(opts.getFileWithCustomWords()), opts.getMaxGuesses(), opts.getMaxHints());
 		}
 		

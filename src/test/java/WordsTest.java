@@ -19,4 +19,11 @@ public class WordsTest {
         String country = words.randomWord("words.txt");
         assertTrue(Arrays.asList(words.getWordListFromFile()).contains(country));
     }
+
+    @Test
+    public void noFileToReadTest() {
+        Words words = new Words();
+        String country = words.randomWord("dfgh.txt");
+        assertEquals("", country);
+    }
 }
