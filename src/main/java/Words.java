@@ -67,18 +67,18 @@ public final class Words {
 	}
 
 	public String[] getRegionsArray() {
-		return regionsArray;
+		return regionsArray.clone();
 	}
 
 	public String[] getCountriesArray() {
-		return countriesArray;
+		return countriesArray.clone();
 	}
 
 	public String[] getCitiesArray() {
-		return citiesArray;
+		return citiesArray.clone();
 	}
 
 	public String[] getWordListFromFile() {
-		return wordListFromFile;
+		return wordListFromFile.clone();
 	}
 }
