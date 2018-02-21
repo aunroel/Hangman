@@ -14,16 +14,17 @@ public class GameState {
 	ArrayList<Character> charsForHints;
 	
 	public Scanner sc = new Scanner(System.in, "UTF-8").useDelimiter("\n");
-	
+
 	public GameState(String wordToGuess, int maxGuesses, int maxHints) {
 		this.wordToGuess = wordToGuess;
 		charsToGuess = new ArrayList<>();
         guessedChars = new ArrayList<>();
 
 		
-		for(int i = 0; i < wordToGuess.length(); ++i) {
-			if (!charsToGuess.contains(wordToGuess.charAt(i)))
+		for (int i = 0; i < wordToGuess.length(); ++i) {
+			if (!charsToGuess.contains(wordToGuess.charAt(i))) {
 				charsToGuess.add(wordToGuess.charAt(i));
+			}
 		}
 		charsForHints = new ArrayList<>(charsToGuess);
 
@@ -47,7 +48,7 @@ public class GameState {
 		Character letter;
 		
 		System.out.print("Guess a letter or word (? for a hint): ");
-		
+
 		String str = sc.nextLine().toLowerCase();
 
 		if (str.equals("")) {
@@ -74,7 +75,7 @@ public class GameState {
 			return guessLetter();
 		}
 
-		for(int i = 0; i < charsToGuess.size(); i++) { // Loop over the charsToGuess guessedChars
+		for (int i = 0; i < charsToGuess.size(); i++) {
 			if (Character.toLowerCase(charsToGuess.get(i)) == Character.toLowerCase(letter)) {
                 guessedChars.add(charsToGuess.get(i));
                 charsToGuess.remove(i);
@@ -88,7 +89,7 @@ public class GameState {
 			}
 		}
 
-		guessesMade++; // One more guess
+		guessesMade++;
 		guessesLeft--;
 		return false;
 	}
@@ -110,7 +111,7 @@ public class GameState {
 			return;
 		}
 
-        if (hintsLeft > 0){
+        if (hintsLeft > 0) {
 			hintsLeft--;
 		}
 

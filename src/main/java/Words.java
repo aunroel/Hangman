@@ -30,7 +30,7 @@ public final class Words {
 			case COUNTRIES:	return countriesArray[rand.nextInt(countriesArray.length)];
 			case CITIES:	return citiesArray[rand.nextInt(citiesArray.length)];
 
-			default: return null;
+			default: return "";
 		}
 	}
 	
@@ -55,7 +55,7 @@ public final class Words {
 			e.printStackTrace();
 		}
 
-		// return wordToGuess from any default category picked randomly
+		// return word from any default category picked randomly
 		return randomWord(rand.nextInt(CITIES) + 1);
 	}
 

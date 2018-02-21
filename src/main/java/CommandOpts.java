@@ -22,11 +22,11 @@ public class CommandOpts {
 		for (int i = 0; i < args.length; ++i) {
 			if (args[i].equals("--guesses") && (i + 1) < args.length) {
 				numericArg = validateInput(maxGuesses, args[i + 1]);
-				maxGuesses = numericArg;
+				maxGuesses = Math.abs(numericArg);
 				i++;
 			} else if (args[i].equals("--hints") && (i + 1) < args.length) {
 				numericArg = validateInput(maxHints, args[i + 1]);
-				maxHints = numericArg;
+				maxHints = Math.abs(numericArg);
 				i++;
 			} else if (args[i].endsWith(".txt")) {
 				fileWithCustomWords = args[i];
