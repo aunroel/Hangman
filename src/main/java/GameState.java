@@ -102,7 +102,7 @@ public class GameState {
 		return (charsToGuess.size() > 0 && guessesLeft == 0);
 	}
 
-	private void hint() {
+	public void hint() {
 	    Random rand = new Random();
         Character hint;
 
@@ -115,6 +115,7 @@ public class GameState {
 			hintsLeft--;
 		}
 
+		// hints should not return the same letter twice
         hint = charsForHints.get(rand.nextInt(charsForHints.size()));
         charsForHints.remove(hint);
 

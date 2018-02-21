@@ -40,6 +40,9 @@ public class Hangman {
 		}
 	}
 
+	/**
+	 * Parses user input according to the provided options, including invalid input processing
+	 */
 	private static void parseUserInput() {
 		if (!opts.getFileWithCustomWords().equals("")) {
 			game = new GameState(wordsObj.randomWord(opts.getFileWithCustomWords()), opts.getMaxGuesses(), opts.getMaxHints());
